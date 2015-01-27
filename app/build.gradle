@@ -6,14 +6,14 @@ android {
 
     defaultConfig {
         applicationId "at.ac.fh.tags"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
