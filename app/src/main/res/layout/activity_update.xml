@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="at.ac.fh.ue6_todo.UpdateActivity">
+
+    <EditText
+        android:id="@+id/text"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:layout_below="@id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="niedrig"
+            android:id="@+id/radio1"
+            android:onClick="onPriorityChanged"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mittel"
+            android:id="@+id/radio2"
+            android:onClick="onPriorityChanged"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hoch"
+            android:id="@+id/radio3"
+            android:onClick="onPriorityChanged"/>
+    </RadioGroup>
+
+    <Button
+        android:onClick="onUpdate"
+        android:layout_alignParentBottom="true"
+        android:text="Ändern"
+        android:id="@+id/update"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
