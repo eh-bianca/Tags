@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class TaskManager {
     public final String DB_NAME = "TODO_DB";
@@ -22,7 +23,8 @@ public class TaskManager {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE task (_id INTEGER PRIMARY KEY, title CHAR, priority INTEGER)");
+            //DATETIME - format: YYYY-MM-DD HH:MI:SS
+            db.execSQL("CREATE TABLE task (_id INTEGER PRIMARY KEY, title CHAR, points INTEGER, list CHAR, date DATETIME)");
         }
 
         @Override
@@ -31,21 +33,23 @@ public class TaskManager {
         }
     }
 
-    public void addTask (String title, int priority) {
+    public void addTask (String title, int points, String list, String date) {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
         //= Behälter mit dem man Schlüssel-Wert Paare angibt, die beim insert in Datenbank geschrieben werden
         cv.put("title", title);
-        cv.put("priority", priority);
+        cv.put("points", points);
+        cv.put("list", list);
+        cv.put("date", date);
 
         db.insert("task", null, cv);
 
     }
-    public Cursor getTasks() {
+    public Cursor getTasksOfList(String list) {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM task ORDER BY priority DESC", null);
+        Cursor c = db.rawQuery("SELECT * FROM task WHERE list = '" + list + "' ORDER BY date", null);
         return c;
     }
     public void removeTask (int id) {
@@ -53,19 +57,20 @@ public class TaskManager {
         db.execSQL("DELETE FROM task WHERE _id = " + id);
     }
 
-    public void updateTask (int id, String text, int priority) {
+    public void updateTask (int id, String text, int points, String list, String date) {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
-        db.execSQL("UPDATE task SET title = '" + text + "', priority = " + priority + " WHERE _id = " + id);
+        db.execSQL("UPDATE task SET title = '" + text + "', points = " + points + ", list = '" + list + "', date = '" + date + "' WHERE _id = " + id);
     }
     public Cursor getTask(int id) {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM task WHERE _id = " + id, null);
         return c;
     }
-    public Cursor getPriorityTasks(int priority) {
+
+    public Cursor getMostCurrentTasks() {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM task WHERE priority = " + priority + " ORDER BY title ASC", null);
+        Cursor c = db.rawQuery("SELECT * FROM task ORDER BY date ASC", null);
         return c;
     }
 }

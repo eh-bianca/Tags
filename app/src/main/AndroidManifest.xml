@@ -21,7 +21,7 @@
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="at.ac.fh.ue6_todo.MainActivity" />
+                android:value="at.ac.fh.tags.MainActivity" />
         </activity>
         <activity
             android:name=".UpdateActivity"
