@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class TaskManager {
     public final String DB_NAME = "TODO_DB";
     private TaskSQLHelper sqlHelper;
@@ -72,5 +74,15 @@ public class TaskManager {
 
         Cursor c = db.rawQuery("SELECT * FROM task ORDER BY date ASC", null);
         return c;
+    }
+    public ArrayList<String> getLists() {
+        SQLiteDatabase db = sqlHelper.getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT distinct list FROM task", null);
+        ArrayList<String> Listen = new ArrayList<String>();
+
+        while(c.moveToNext()){
+            Listen.add(c.getString(0));
+        }
+        return Listen;
     }
 }
