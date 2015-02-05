@@ -28,8 +28,7 @@ import java.util.Date;
 public class ManageTaskActivity extends Activity {
 
     private TaskManager tm;
-    private int points = 1;
-    private String list = "not_defined";
+    private int points = 10;
     Context context = this;
 
     @Override
@@ -43,29 +42,35 @@ public class ManageTaskActivity extends Activity {
         timePicker.setIs24HourView(true);
         ArrayList<String> Listen = tm.getLists();
 
+        Calendar calendar =Calendar.getInstance();
+        int hour=calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+        timePicker.setCurrentHour(hour);
+        timePicker.setCurrentMinute(min);
+
+        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
+        datePicker.setMinDate(System.currentTimeMillis() - 1000);
+
         Spinner s = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, Listen);
         s.setAdapter(adapter);
-        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        datePicker.setMinDate(System.currentTimeMillis() - 1000);
     }
     public void onPointsChanged(View v) {
 
         RadioButton rb = (RadioButton) v;
 
         switch (rb.getId()) {
-            case R.id.radio1:
-                points = 1;
+            case R.id .radio10:
+                points = 10;
                 break;
-            case R.id.radio2:
-                points = 2;
+            case R.id.radio30:
+                points = 30;
                 break;
-            case R.id.radio3:
-                points = 3;
+            case R.id.radio50:
+                points = 50;
                 break;
-
             default:
-                points = 1;
+                points = 10;
 
         }
     }
@@ -102,7 +107,6 @@ public class ManageTaskActivity extends Activity {
             }
         });
         alert.show();
-
     }
 
     public void onSave(View v) {

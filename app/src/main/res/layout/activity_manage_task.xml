@@ -21,7 +21,7 @@
     <Button
         android:onClick="onSave"
         android:layout_alignParentBottom="true"
-        android:text="Speichern"
+        android:text="Save"
         android:textSize="20dp"
         android:id="@+id/save"
         android:layout_width="fill_parent"
@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1 Point = 10 min. work"
+        android:text="1 Point = 1 min. work"
         android:textColor="#ff909090"
         android:id="@+id/text2"
         android:textSize="14dp"
@@ -79,21 +79,20 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:id="@+id/radio1"
+            android:text="10"
+            android:id="@+id/radio10"
             android:onClick="onPointsChanged"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2"
-            android:id="@+id/radio2"
-            android:onClick="onPointsChanged"
-            android:layout_toRightOf="@+id/radio1"/>
+            android:text="30"
+            android:id="@+id/radio20"
+            android:onClick="onPointsChanged"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
-            android:id="@+id/radio3"
+            android:text="50"
+            android:id="@+id/radio30"
             android:onClick="onPointsChanged"/>
     </RadioGroup>
     <TextView
@@ -114,7 +113,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:id="@+id/spinner"
-        android:background="#ffc2ccff" />
+        android:background="#ff89e5ff" />
     <Button
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -123,9 +122,10 @@
         android:textAlignment="center"
         android:textDirection="locale"
         android:id="@+id/newList"
-        android:layout_alignTop="@+id/spinner"
-        android:layout_toRightOf="@+id/spinner"
-        android:onClick="newList"/>
+        android:onClick="newList"
+        android:layout_below="@id/radiogroup"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/spinner" />
 
 
 
