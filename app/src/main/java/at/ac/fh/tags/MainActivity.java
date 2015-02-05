@@ -1,5 +1,4 @@
 package at.ac.fh.tags;
-//test
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,9 +22,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         tm = new TaskManager(this);
-        Cursor c1 = tm.getPriorityTasks(1);
-        Cursor c2 = tm.getPriorityTasks(2);
-        Cursor c3 = tm.getPriorityTasks(3);
+        Log.i("DB",tm.getTasksOfList("he").toString());
+
+
+        Cursor c1 = tm.getTasksOfList("he");
+        Cursor c2 = tm.getTasksOfList("du");
+        Cursor c3 = tm.getMostCurrentTasks();
 
         ListView listView1 = (ListView) findViewById(R.id.task_list1);
         listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -88,7 +90,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        String[] columns = {"title", "priority"};
+        String[] columns = {"title", "points","list","date"};
         int[] views = {R.id.task_title};
 
         //Adapter mappt zwischen dem Cursor (oder anderen Datenquelle) und der ListView
@@ -98,7 +100,6 @@ public class MainActivity extends Activity {
         listView2.setAdapter(adapter2);
         SimpleCursorAdapter adapter3 = new SimpleCursorAdapter(this, R.layout.task_entry, c3, columns, views);
         listView3.setAdapter(adapter3);
-
     }
 
 

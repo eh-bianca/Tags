@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class TaskManager {
     public final String DB_NAME = "TODO_DB";
     private TaskSQLHelper sqlHelper;
-
     public TaskManager(Context context) {
         sqlHelper = new TaskSQLHelper(context);
     }
