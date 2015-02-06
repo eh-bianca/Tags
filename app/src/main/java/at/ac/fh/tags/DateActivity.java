@@ -24,6 +24,11 @@ import android.widget.SimpleCursorAdapter;
 
     public class DateActivity extends Activity {
 
+
+
+
+
+
         private TaskManager tm;
 
         @Override
@@ -123,6 +128,8 @@ import android.widget.SimpleCursorAdapter;
             loadButtons();
 
         }
+
+
         public void loadButtons(){
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -136,8 +143,7 @@ import android.widget.SimpleCursorAdapter;
             btn1.setLayoutParams(params);
             btn1.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
-                    Intent mainActivity = new Intent(DateActivity.this, MainActivity.class);
-                    DateActivity.this.startActivity(mainActivity);
+                    startActivityMain(v);
                 }
             });
 
@@ -145,10 +151,9 @@ import android.widget.SimpleCursorAdapter;
             params = (RelativeLayout.LayoutParams) btn2.getLayoutParams();
             params.width = width/3;
             btn2.setLayoutParams(params);
-            btn1.setOnClickListener(new View.OnClickListener(){
+            btn2.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
-                    Intent dateActivity = new Intent(DateActivity.this, DateActivity.class);
-                    DateActivity.this.startActivity(dateActivity);
+                   startActivityDate(v);
                 }
             });
 
@@ -158,6 +163,16 @@ import android.widget.SimpleCursorAdapter;
             btn3.setLayoutParams(params);
 
     }
+
+        public void startActivityMain(View v){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        public void startActivityDate(View v){
+            Intent intent = new Intent(this, DateActivity.class);
+            startActivity(intent);
+        }
 
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {

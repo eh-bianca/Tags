@@ -54,4 +54,29 @@
         android:layout_below="@id/task_list"
         android:text="New List"/>
 
+    <Button
+        android:text="cock"
+        android:id="@+id/btn1"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:text="block"
+        android:id="@+id/btn2"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        />
+
+    <Button
+        android:text="rock"
+        android:id="@+id/btn3"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>
