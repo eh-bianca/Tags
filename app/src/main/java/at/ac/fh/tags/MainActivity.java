@@ -2,6 +2,11 @@ package at.ac.fh.tags;
 //test
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,8 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends Activity {
 
@@ -23,11 +34,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         tm = new TaskManager(this);
-        Cursor c1 = tm.getPriorityTasks(1);
-        Cursor c2 = tm.getPriorityTasks(2);
-        Cursor c3 = tm.getPriorityTasks(3);
 
-        ListView listView1 = (ListView) findViewById(R.id.task_list1);
+        ListView listView1 = (ListView) findViewById(R.id.task_list);
+
+        ArrayList<String> Listen = new ArrayList<String>();
+
+        Listen = tm.getLists();
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.test_list_item, Listen);  //Adapter mappt zwischen dem Cursor (oder anderen Datenquelle) und der ListView
+
+        listView1.setAdapter(arrayAdapter);
+
         listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
@@ -39,68 +56,46 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Cursor c = (Cursor) parent.getItemAtPosition(i);
-                int id = c.getInt(0);
-                startUpdateActivity(view, id);
-            }
-        });
-        ListView listView2 = (ListView) findViewById(R.id.task_list2);
-        listView2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-                Cursor c = (Cursor) parent.getItemAtPosition(i);
-                int id = c.getInt(0);
-                tm.removeTask(id);
-                finish();
-                startActivity(getIntent());
-                return true;
-            }
-        });
-        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Cursor c = (Cursor) parent.getItemAtPosition(i);
-                int id = c.getInt(0);
-                startUpdateActivity(view, id);
-            }
-        });
-        ListView listView3 = (ListView) findViewById(R.id.task_list3);
-        listView3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-                Cursor c = (Cursor) parent.getItemAtPosition(i);
-                int id = c.getInt(0);
-                tm.removeTask(id);
-                finish();
-                startActivity(getIntent());
-                return true;
-            }
-        });
-        listView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Cursor c = (Cursor) parent.getItemAtPosition(i);
-                int id = c.getInt(0);
-                startUpdateActivity(view, id);
+
+
+        final Button btnlist = (Button) findViewById(R.id.btn_newlist);
+        btnlist.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                Intent newlist = new Intent(MainActivity.this, NewList.class);
+
+                MainActivity.this.startActivity(newlist);
             }
         });
 
-        String[] columns = {"title", "priority"};
-        int[] views = {R.id.task_title};
 
-        //Adapter mappt zwischen dem Cursor (oder anderen Datenquelle) und der ListView
-        SimpleCursorAdapter adapter1 = new SimpleCursorAdapter(this, R.layout.task_entry, c1, columns, views);
-        listView1.setAdapter(adapter1);
-        SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, R.layout.task_entry, c2, columns, views);
-        listView2.setAdapter(adapter2);
-        SimpleCursorAdapter adapter3 = new SimpleCursorAdapter(this, R.layout.task_entry, c3, columns, views);
-        listView3.setAdapter(adapter3);
+/* muss in seperaten Klassen gemacht werden
+        NotificationManager notificationManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+
+        // prepare intent which is triggered if the
+// notification is selected
+
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+// build notification
+// the addAction re-use the same intent to keep the example short
+        Notification notification  = new Notification.Builder(this)
+                .setContentTitle("New mail from " + "test@gmail.com")
+                .setContentText("Subject")
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentIntent(pIntent)
+                .setAutoCancel(true)
+                .addAction(R.drawable.ic_launcher, "Call", pIntent)
+                .addAction(R.drawable.ic_launcher, "More", pIntent)
+                .addAction(R.drawable.ic_launcher, "And more", pIntent).build();
+
+*/
+
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,4 +125,12 @@ public class MainActivity extends Activity {
         intent.putExtra("TaskId", id);
         startActivity(intent);
     }
+
 }
+
+
+
+
+
+
+
