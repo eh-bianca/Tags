@@ -81,7 +81,7 @@
         android:layout_alignParentLeft="true"/>
 
     <ImageButton
-        android:src="@drawable/lists"
+        android:src="@drawable/list"
         android:id="@+id/btn1"
         android:layout_width="20dp"
         android:layout_height="40dp"

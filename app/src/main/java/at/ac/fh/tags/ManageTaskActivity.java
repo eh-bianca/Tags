@@ -7,14 +7,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,6 +55,22 @@ public class ManageTaskActivity extends Activity {
         Spinner s = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, Listen);
         s.setAdapter(adapter);
+
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout_manageTask);
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
+    }
+    protected void hideKeyboard(View view)
+    {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
     public void onPointsChanged(View v) {
 
@@ -119,25 +139,35 @@ public class ManageTaskActivity extends Activity {
              int temp = dp.getMonth() + 1;
              month = (String) "0" + temp;
         }
-        else{
+        else {
             month = (int) dp.getMonth() + 1;
         }
-
-
-        if (dp.getDayOfMonth() < 10){
+        if(dp.getDayOfMonth() < 10){
             dayOfMonth = (String) "0" + dp.getDayOfMonth();
         }
-        else{
+        else {
             dayOfMonth = dp.getDayOfMonth();
         }
         String Date = dp.getYear() + "-" + month + "-" + dayOfMonth + " " + tp.getCurrentHour() + ":" + tp.getCurrentMinute() + ":00";
-        String List = s.getSelectedItem().toString();
+        String list = "";
+        try {
+            list = s.getSelectedItem().toString();
+        }
+        catch(Exception e) {
+            Context context = getApplicationContext();
+            CharSequence noList = "List is missing";
+            int duration = Toast.LENGTH_SHORT;
 
-        tm.addTask(text.getText().toString(),points, List, Date);
+            Toast toast = Toast.makeText(context, noList, duration);
+            toast.show();
 
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+            list = "null";
+        }
+        if (list != "null") {
+            tm.addTask(text.getText().toString(), points, list, Date);
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        }
     }
-
-
-}

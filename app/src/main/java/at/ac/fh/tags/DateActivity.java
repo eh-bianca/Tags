@@ -190,7 +190,6 @@ import java.util.Locale;
             loadButtons();
         }
 
-
         public void loadButtons(){
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
