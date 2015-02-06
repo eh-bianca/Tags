@@ -89,6 +89,7 @@ public class TaskManager {
             //Cursor c = null;
             return c;
         }
+
     }
     public ArrayList<String> getLists() {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
