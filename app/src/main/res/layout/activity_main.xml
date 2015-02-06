@@ -47,6 +47,14 @@
         android:layout_marginTop="30dp" />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/levelBar"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/progressBar"/>
+
+
     <Button
         android:text="cock"
         android:id="@+id/btn1"

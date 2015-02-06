@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -22,9 +23,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,14 @@ public class MainActivity extends Activity {
 
     private TaskManager tm;
     private Context context = this;
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private TextView textView;
+    private Handler handler = new Handler();
+    private int level;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,40 @@ public class MainActivity extends Activity {
 
         tm = new TaskManager(this);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        textView = (TextView) findViewById(R.id.levelBar);
+
+        level=doWork();
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (progressStatus < 100) {
+
+                    level+=1;
+
+
+
+
+                    handler.post(new Runnable() {
+                        public void run() {
+
+                            if(progressStatus>100){
+                                level=0;
+                            }
+                            else{
+
+                                level=100;
+
+                            }
+
+                            progressBar.setProgress(progressStatus);
+                            textView.setText(progressStatus + "/" + progressBar.getMax());
+                        }
+
+                    });
+                }
+            }
+            }).start();
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -93,6 +138,17 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    private int doWork()
+    {
+        int level=tm.getSum();
+
+       return level;
+
+
+
+    }
 
 
 
@@ -131,7 +187,7 @@ public class MainActivity extends Activity {
                 .addAction(R.drawable.ic_launcher, "And more", pIntent).build();
 
 */
-    }
+
     public void startTasksOfList(View v, String list) {
         Intent intent = new Intent(this, TasksOfList.class);
         intent.putExtra("List", list);
@@ -210,6 +266,8 @@ public class MainActivity extends Activity {
         intent.putExtra("TaskId", id);
         startActivity(intent);
     }
+
+
 
 }
 
