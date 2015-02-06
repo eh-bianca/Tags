@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
             }
         });
 
-
+//test
 /* muss in seperaten Klassen gemacht werden
         NotificationManager notificationManager = (NotificationManager)
                 getSystemService(NOTIFICATION_SERVICE);
