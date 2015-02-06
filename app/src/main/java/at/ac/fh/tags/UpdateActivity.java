@@ -146,7 +146,26 @@ public class UpdateActivity extends Activity {
         Spinner s = (Spinner) findViewById(R.id.spinner);
         EditText text = (EditText) findViewById(R.id.title);
 
-        String dateTime = dp.getYear() + "-" + dp.getMonth() + "-" + dp.getDayOfMonth() + " " + tp.getCurrentHour() + ":" + tp.getCurrentMinute() + ":00";
+        Object month;
+        Object dayOfMonth;
+
+        if(dp.getMonth() + 1 < 10){
+            int temp = dp.getMonth() + 1;
+            month = (String) "0" + temp;
+        }
+        else{
+            month = (int) dp.getMonth() + 1;
+        }
+
+
+        if (dp.getDayOfMonth() < 10){
+            dayOfMonth = (String) "0" + dp.getDayOfMonth();
+        }
+        else{
+            dayOfMonth = dp.getDayOfMonth();
+        }
+
+        String dateTime = dp.getYear() + "-" + month + "-" + dayOfMonth + " " + tp.getCurrentHour() + ":" + tp.getCurrentMinute() + ":00";
         String List = s.getSelectedItem().toString();
 
         tm.updateTask(id,text.getText().toString(),points,List,dateTime);
