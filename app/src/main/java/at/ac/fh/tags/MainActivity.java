@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
     private TaskManager tm;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,15 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String list = (String) adapterView.getItemAtPosition(i);
+                startTasksOfList(view, list);
+            }
+        });
+
+
 
 
         /*final Button btnlist = (Button) findViewById(R.id.btn_newlist);
@@ -100,9 +112,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
 
-                Intent newlist = new Intent(MainActivity.this, NewList.class);
+                //   Intent newlist = new Intent(MainActivity.this, NewList.class);
 
-                MainActivity.this.startActivity(newlist);
+                //  MainActivity.this.startActivity(newlist);
             }
         });  */
 
@@ -130,8 +142,11 @@ public class MainActivity extends Activity {
                 .addAction(R.drawable.ic_launcher, "And more", pIntent).build();
 
 */
-
-
+    }
+    public void startTasksOfList(View v, String list) {
+        Intent intent = new Intent(this, TasksOfList.class);
+        intent.putExtra("List", list);
+        startActivity(intent);
     }
 
    /* public void loadButtons(){

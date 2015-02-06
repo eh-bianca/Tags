@@ -17,7 +17,6 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Lists"
         android:id="@+id/textView"
         android:textSize="25dp"
@@ -47,12 +46,6 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp" />
 
-    <Button
-        android:id="@+id/btn_newlist"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/task_list"
-        android:text="New List"/>
 
     <Button
         android:text="cock"

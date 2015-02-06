@@ -4,7 +4,8 @@
     <string name="app_name">ToDo-List</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_manage_task">Manage Task</string>
-    <string name="title_activity_update">Update</string>
+    <string name="title_activity_manage_task">New Task</string>
+    <string name="title_activity_update">Update Task</string>
+    <string name="title_activity_tasks_of_list">TasksOfList</string>
 
 </resources>

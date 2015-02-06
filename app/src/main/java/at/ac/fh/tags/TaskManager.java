@@ -44,9 +44,7 @@ public class TaskManager {
         cv.put("points", points);
         cv.put("list", list);
         cv.put("date", date);
-
         db.insert("task", null, cv);
-
     }
     public Cursor getTasksOfList(String list) {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
