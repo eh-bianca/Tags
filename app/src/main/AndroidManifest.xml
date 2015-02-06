@@ -28,9 +28,10 @@
             android:name=".UpdateActivity"
             android:label="@string/title_activity_update" >
         </activity>
+        <!--
         <activity
             android:name=".TasksOfList" >
-            </activity>
+            </activity> -->
         <activity android:name=".DateActivity"></activity>
     </application>
 
