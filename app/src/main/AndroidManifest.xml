@@ -33,6 +33,7 @@
             android:name=".TasksOfList" >
             </activity> -->
         <activity android:name=".DateActivity"></activity>
+        <activity android:name=".TasksOfList"></activity>
     </application>
 
 </manifest>

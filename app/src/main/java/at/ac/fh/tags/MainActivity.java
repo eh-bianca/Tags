@@ -144,19 +144,6 @@ public class MainActivity extends Activity {
 
     }
 
-
-
-        /*final Button btnlist = (Button) findViewById(R.id.btn_newlist);
-        btnlist.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-
-                //   Intent newlist = new Intent(MainActivity.this, NewList.class);
-
-                //  MainActivity.this.startActivity(newlist);
-            }
-        });  */
-
 //test
 /* muss in seperaten Klassen gemacht werden
         NotificationManager notificationManager = (NotificationManager)
@@ -188,39 +175,7 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-   /* public void loadButtons(){
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
 
-        Button btn1 =(Button) findViewById(R.id.btn1);
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btn1.getLayoutParams();
-        params.width = width/3;
-        btn1.setLayoutParams(params);
-        btn1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startActivityMain(v);
-            }
-        });
-
-        Button btn2 =(Button) findViewById(R.id.btn2);
-        params = (RelativeLayout.LayoutParams) btn2.getLayoutParams();
-        params.width = width/3;
-        btn2.setLayoutParams(params);
-        btn1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startActivityDate(v);
-            }
-        });
-
-        Button btn3 =(Button) findViewById(R.id.btn3);
-        params = (RelativeLayout.LayoutParams) btn3.getLayoutParams();
-        params.width = width/3;
-        btn3.setLayoutParams(params);
-
-    } */
 
     public void startActivityMain(View v){
         Intent intent = new Intent(this, MainActivity.class);

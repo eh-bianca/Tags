@@ -122,7 +122,6 @@ import java.util.Locale;
             listView1.setAdapter(adapter1);
             SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, R.layout.task_entry, c2, columns, views);
             listView2.setAdapter(adapter2);
-
             loadButtons();
 
         }
