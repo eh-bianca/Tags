@@ -27,11 +27,40 @@ public class TaskManager {
         public void onCreate(SQLiteDatabase db) {
             //DATETIME - format: YYYY-MM-DD HH:MI:SS
             db.execSQL("CREATE TABLE task (_id INTEGER PRIMARY KEY, title CHAR, points INTEGER, list CHAR, date DATETIME)");
+            db.execSQL("CREATE TABLE points_sum (xp INTEGER PRIMARY KEY)");
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
+        }
+    }
+    public int getSum () {
+        SQLiteDatabase db = sqlHelper.getWritableDatabase();
 
+        Cursor c = db.rawQuery("SELECT xp FROM points_sum", null);
+
+        int sum = 0;
+        while(c.moveToNext()){
+            sum = c.getInt(0);
+        }
+        return sum;
+    }
+    public void updateSum (int points) {
+        SQLiteDatabase db = sqlHelper.getWritableDatabase();
+
+        Cursor c = db.rawQuery("SELECT xp FROM points_sum", null);
+        int sum = 0;
+        while(c.moveToNext()){
+            sum = c.getInt(0);
+        }
+        if (sum == 0) {
+            ContentValues cv = new ContentValues();
+            cv.put("xp", points);
+            db.insert("points_sum", null, cv);
+        }
+        else {
+
+            db.execSQL("UPDATE points_sum SET xp = " + points);
         }
     }
 

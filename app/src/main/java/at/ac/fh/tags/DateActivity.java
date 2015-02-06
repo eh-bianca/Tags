@@ -24,11 +24,6 @@ import android.widget.SimpleCursorAdapter;
 
     public class DateActivity extends Activity {
 
-
-
-
-
-
         private TaskManager tm;
 
         @Override

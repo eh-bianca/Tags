@@ -70,7 +70,12 @@ public class TasksOfList extends Activity {
                 alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int points = cursor.getInt(2);
-
+                        Log.i("punkte vorher", "" + tm.getSum());
+                        tm.updateSum(points + tm.getSum());
+                        Log.i("punkte nachher", "" + tm.getSum());
+                        tm.removeTask(cursor.getInt(0));
+                        finish();
+                        startActivity(getIntent());
                     }
                 });
 

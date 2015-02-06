@@ -85,17 +85,6 @@ public class MainActivity extends Activity {
 
         listView1.setAdapter(arrayAdapter);
 
-        listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-                Cursor c = (Cursor) parent.getItemAtPosition(i);
-                int id = c.getInt(0);
-                tm.removeTask(id);
-                finish();
-                startActivity(getIntent());
-                return true;
-            }
-        });
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
