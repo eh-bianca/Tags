@@ -1,6 +1,9 @@
 package at.ac.fh.tags;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Point;
@@ -32,6 +35,7 @@ import java.util.Locale;
     public class DateActivity extends Activity {
 
         private TaskManager tm;
+        private Context context = this;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +62,12 @@ import java.util.Locale;
             String nextWeekAsString = dateFormat.format(nextWeek);
 
 
-
-
             /*
         try {
             currentDate = formatter.parse(cal.getTime().toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }*/
-
 
 
             Cursor c1 = tm.getMostCurrentTasks(todayAsString, tomorrowAsString,nextWeekAsString, "heute");
@@ -92,6 +93,38 @@ import java.util.Locale;
                     startUpdateActivity(view, id);
                 }
             });
+            listView1.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    final Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
+
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("Did you complete the task?");
+
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            int points = cursor.getInt(2);
+                            Log.i("punkte vorher", "" + tm.getSum());
+                            tm.updateSum(points + tm.getSum());
+                            Log.i("punkte nachher", "" + tm.getSum());
+                            tm.removeTask(cursor.getInt(0));
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+
+                    alert.setNegativeButton("No, but delete task", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            tm.removeTask(cursor.getInt(0));
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+                    alert.show();
+                    return true;
+                }
+            });
+
             ListView listView2 = (ListView) findViewById(R.id.task_list2);
             listView2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
@@ -113,6 +146,38 @@ import java.util.Locale;
                 }
             });
 
+            listView2.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    final Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
+
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("Did you complete the task?");
+
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            int points = cursor.getInt(2);
+                            Log.i("punkte vorher", "" + tm.getSum());
+                            tm.updateSum(points + tm.getSum());
+                            Log.i("punkte nachher", "" + tm.getSum());
+                            tm.removeTask(cursor.getInt(0));
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+
+                    alert.setNegativeButton("No, but delete task", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            tm.removeTask(cursor.getInt(0));
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+                    alert.show();
+                    return true;
+                }
+            });
+
 
             String[] columns = {"title", "date"};
             int[] views = {R.id.task_title, R.id.task_date};
@@ -123,7 +188,6 @@ import java.util.Locale;
             SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, R.layout.task_entry, c2, columns, views);
             listView2.setAdapter(adapter2);
             loadButtons();
-
         }
 
 
