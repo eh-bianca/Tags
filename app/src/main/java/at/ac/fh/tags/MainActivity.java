@@ -56,37 +56,23 @@ public class MainActivity extends Activity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         textView = (TextView) findViewById(R.id.levelBar);
 
-        level=doWork();
 
-        new Thread(new Runnable() {
-            public void run() {
-                while (progressStatus < 100) {
+        int level=tm.getSum();
 
-                    level+=1;
+        int barStand=level%100;
 
 
+        Log.i("Level: ", "" + level);
+
+        while (progressStatus < barStand) {
+        progressStatus += 1;
 
 
-                    handler.post(new Runnable() {
-                        public void run() {
+        progressBar.setProgress(progressStatus);
 
-                            if(progressStatus>100){
-                                level=0;
-                            }
-                            else{
+        textView.setText(progressStatus + "/" + progressBar.getMax());
 
-                                level=100;
-
-                            }
-
-                            progressBar.setProgress(progressStatus);
-                            textView.setText(progressStatus + "/" + progressBar.getMax());
-                        }
-
-                    });
-                }
-            }
-            }).start();
+        }
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -134,7 +120,9 @@ public class MainActivity extends Activity {
 
     }
 
-    private int doWork()
+
+
+  /*  private int doWork()
     {
         int level=tm.getSum();
 
@@ -142,7 +130,7 @@ public class MainActivity extends Activity {
 
 
 
-    }
+    } */
 
 //test
 /* muss in seperaten Klassen gemacht werden
