@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TaskManager {
     public final String DB_NAME = "TODO_DB";
@@ -68,11 +69,26 @@ public class TaskManager {
         return c;
     }
 
-    public Cursor getMostCurrentTasks() {
+    public Cursor getMostCurrentTasks(String date, String whatDate) {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM task ORDER BY date ASC", null);
-        return c;
+
+        if(whatDate == "heute"){
+            //Cursor c = db.rawQuery("SELECT * FROM task where date = CONVERT(VARCHAR(12), " + date + ", 110)" , null);
+            Cursor c = null;
+            return c;
+        }
+        else if(whatDate == "morgen"){
+
+            Cursor c = db.rawQuery("SELECT * FROM task WHERE date = date()", null);
+            //Cursor c = null;
+            return c;
+        }
+        else{
+            Cursor c = db.rawQuery("SELECT * FROM task ORDER BY date ASC",null);
+            //Cursor c = null;
+            return c;
+        }
     }
     public ArrayList<String> getLists() {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
