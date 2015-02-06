@@ -17,6 +17,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by Vincent McCawk on 06.02.2015.
  */
@@ -32,21 +38,38 @@ import android.widget.SimpleCursorAdapter;
             setContentView(R.layout.activity_date);
 
             tm = new TaskManager(this);
-            String currentDate = "2015-02-05";
-        /*Calendar cal = Calendar.getInstance();
-        DateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.GERMAN);
-        Date currentDate = null;
+            Calendar calendar = Calendar.getInstance();
+            Date currentDate = calendar.getTime();
+
+            Log.i("heuteSWAG", currentDate.toString());
+
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            Date tomorrow = calendar.getTime();
+
+            calendar.add(Calendar.DAY_OF_YEAR, 7);
+            Date nextWeek = calendar.getTime();
+
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            String todayAsString = dateFormat.format(currentDate);
+            String tomorrowAsString = dateFormat.format(tomorrow);
+            String nextWeekAsString = dateFormat.format(nextWeek);
+
+
+
+
+            /*
         try {
             currentDate = formatter.parse(cal.getTime().toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }*/
-            Log.i("Heute", currentDate);
 
 
-            Cursor c1 = tm.getMostCurrentTasks(currentDate, "heute");
-            Cursor c2 = tm.getMostCurrentTasks(currentDate, "morgen");
-            Cursor c3 = tm.getMostCurrentTasks(currentDate, "nächsteWoche");
+
+            Cursor c1 = tm.getMostCurrentTasks(todayAsString, tomorrowAsString,nextWeekAsString, "heute");
+            Cursor c2 = tm.getMostCurrentTasks(todayAsString, tomorrowAsString,nextWeekAsString, "dieseWoche");
 
             ListView listView1 = (ListView) findViewById(R.id.task_list1);
             listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -88,37 +111,16 @@ import android.widget.SimpleCursorAdapter;
                     startUpdateActivity(view, id);
                 }
             });
-            ListView listView3 = (ListView) findViewById(R.id.task_list3);
-            listView3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-                    Cursor c = (Cursor) parent.getItemAtPosition(i);
-                    int id = c.getInt(0);
-                    tm.removeTask(id);
-                    finish();
-                    startActivity(getIntent());
-                    return true;
-                }
-            });
-            listView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                    Cursor c = (Cursor) parent.getItemAtPosition(i);
-                    int id = c.getInt(0);
-                    startUpdateActivity(view, id);
-                }
-            });
 
-            String[] columns = {"title", "points","list","date"};
-            int[] views = {R.id.task_title};
+
+            String[] columns = {"title", "date"};
+            int[] views = {R.id.task_title, R.id.task_date};
 
             //Adapter mappt zwischen dem Cursor (oder anderen Datenquelle) und der ListView
             SimpleCursorAdapter adapter1 = new SimpleCursorAdapter(this, R.layout.task_entry, c1, columns, views);
             listView1.setAdapter(adapter1);
             SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, R.layout.task_entry, c2, columns, views);
             listView2.setAdapter(adapter2);
-            SimpleCursorAdapter adapter3 = new SimpleCursorAdapter(this, R.layout.task_entry, c3, columns, views);
-            listView3.setAdapter(adapter3);
 
             loadButtons();
 

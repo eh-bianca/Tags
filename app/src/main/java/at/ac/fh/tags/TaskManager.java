@@ -96,23 +96,18 @@ public class TaskManager {
         return c;
     }
 
-    public Cursor getMostCurrentTasks(String date, String whatDate) {
+    public Cursor getMostCurrentTasks(String today, String tomorrow, String nächsteWoche,  String whatDate) {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
 
 
         if(whatDate == "heute"){
-            //Cursor c = db.rawQuery("SELECT * FROM task where date = CONVERT(VARCHAR(12), " + date + ", 110)" , null);
-            Cursor c = null;
+            //String morgen = "date('now', '2 days')"
+            Cursor c = db.rawQuery("SELECT * FROM task WHERE date BETWEEN '" + today + "' AND '" + tomorrow + "'", null);
             return c;
         }
-        else if(whatDate == "morgen"){
 
-            Cursor c = db.rawQuery("SELECT * FROM task WHERE date = date()", null);
-            //Cursor c = null;
-            return c;
-        }
         else{
-            Cursor c = db.rawQuery("SELECT * FROM task ORDER BY date ASC",null);
+            Cursor c = db.rawQuery("SELECT * FROM task WHERE date BETWEEN '" + tomorrow + "' AND '" + nächsteWoche + "'", null);
             //Cursor c = null;
             return c;
         }
