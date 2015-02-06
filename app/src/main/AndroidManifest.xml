@@ -28,10 +28,10 @@
             android:name=".UpdateActivity"
             android:label="@string/title_activity_update" >
         </activity>
-        <activity
-            android:name=".NewList"
-            android:label="@string/title_activity_new_list" >
+        <activity android:name=".DateActivity">
+
         </activity>
+
     </application>
 
 </manifest>
