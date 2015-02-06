@@ -26,11 +26,14 @@ import android.widget.TimePicker;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.xml.transform.Source;
+
 
 public class UpdateActivity extends Activity {
     private TaskManager tm;
     private int points = 10;
     private int id;
+    private int source;
     private TaskManager.TaskSQLHelper sqlHelper;
     private RadioButton rb;
     private String currentList = "";
@@ -187,8 +190,16 @@ public class UpdateActivity extends Activity {
         String List = s.getSelectedItem().toString();
 
         tm.updateTask(id,text.getText().toString(),points,List,dateTime);
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        Bundle extras = getIntent().getExtras();
+        source = extras.getInt("Source");
+        if(source == 1){
+            Intent intent = new Intent(this,DateActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
 

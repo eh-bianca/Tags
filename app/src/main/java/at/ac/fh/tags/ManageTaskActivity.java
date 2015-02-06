@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -30,6 +31,7 @@ public class ManageTaskActivity extends Activity {
 
     private TaskManager tm;
     private int points = 10;
+    private int source;
     Context context = this;
 
     @Override
@@ -57,11 +59,9 @@ public class ManageTaskActivity extends Activity {
         s.setAdapter(adapter);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout_manageTask);
-        layout.setOnTouchListener(new View.OnTouchListener()
-        {
+        layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent ev)
-            {
+            public boolean onTouch(View view, MotionEvent ev) {
                 hideKeyboard(view);
                 return false;
             }
@@ -135,25 +135,22 @@ public class ManageTaskActivity extends Activity {
         Object month;
         Object dayOfMonth;
 
-        if(dp.getMonth() + 1 < 10){
-             int temp = dp.getMonth() + 1;
-             month = (String) "0" + temp;
-        }
-        else {
+        if (dp.getMonth() + 1 < 10) {
+            int temp = dp.getMonth() + 1;
+            month = (String) "0" + temp;
+        } else {
             month = (int) dp.getMonth() + 1;
         }
-        if(dp.getDayOfMonth() < 10){
+        if (dp.getDayOfMonth() < 10) {
             dayOfMonth = (String) "0" + dp.getDayOfMonth();
-        }
-        else {
+        } else {
             dayOfMonth = dp.getDayOfMonth();
         }
         String Date = dp.getYear() + "-" + month + "-" + dayOfMonth + " " + tp.getCurrentHour() + ":" + tp.getCurrentMinute() + ":00";
         String list = "";
         try {
             list = s.getSelectedItem().toString();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             Context context = getApplicationContext();
             CharSequence noList = "List is missing";
             int duration = Toast.LENGTH_SHORT;
@@ -164,9 +161,15 @@ public class ManageTaskActivity extends Activity {
         }
         if (list != "null") {
             tm.addTask(text.getText().toString(), points, list, Date);
-
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            Bundle extras = getIntent().getExtras();
+            source = extras.getInt("Source");
+            if (source == 1) {
+                Intent intent = new Intent(this, DateActivity.class);
+                startActivity(intent);
+            } else{
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
         }
-        }
+      }
     }

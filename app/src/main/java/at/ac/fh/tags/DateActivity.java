@@ -36,6 +36,7 @@ import java.util.Locale;
 
         private TaskManager tm;
         private Context context = this;
+        int source = 1;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -74,17 +75,7 @@ import java.util.Locale;
             Cursor c2 = tm.getMostCurrentTasks(todayAsString, tomorrowAsString,nextWeekAsString, "dieseWoche");
 
             ListView listView1 = (ListView) findViewById(R.id.task_list1);
-            listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-                    Cursor c = (Cursor) parent.getItemAtPosition(i);
-                    int id = c.getInt(0);
-                    tm.removeTask(id);
-                    finish();
-                    startActivity(getIntent());
-                    return true;
-                }
-            });
+
             listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
@@ -126,17 +117,7 @@ import java.util.Locale;
             });
 
             ListView listView2 = (ListView) findViewById(R.id.task_list2);
-            listView2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-                    Cursor c = (Cursor) parent.getItemAtPosition(i);
-                    int id = c.getInt(0);
-                    tm.removeTask(id);
-                    finish();
-                    startActivity(getIntent());
-                    return true;
-                }
-            });
+
             listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
@@ -244,6 +225,7 @@ import java.util.Locale;
             if (id == R.id.action_new) {
 
                 Intent intent = new Intent(this, ManageTaskActivity.class);
+                intent.putExtra("Source", source);
                 startActivity(intent);
 
                 return true;
@@ -254,6 +236,7 @@ import java.util.Locale;
         public void startUpdateActivity(View v, int id) {
                 Intent intent = new Intent(this, UpdateActivity.class);
             intent.putExtra("TaskId", id);
+            intent.putExtra("Source", source);
             startActivity(intent);
         }
     }

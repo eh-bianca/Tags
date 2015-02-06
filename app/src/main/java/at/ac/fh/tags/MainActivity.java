@@ -191,6 +191,7 @@ public class MainActivity extends Activity {
         if (id == R.id.action_new) {
 
             Intent intent = new Intent(this, ManageTaskActivity.class);
+            intent.putExtra("Source", 0);
             startActivity(intent);
 
             return true;
@@ -201,6 +202,7 @@ public class MainActivity extends Activity {
     public void startUpdateActivity(View v, int id) {
         Intent intent = new Intent(this, UpdateActivity.class);
         intent.putExtra("TaskId", id);
+        intent.putExtra("Source", 0);
         startActivity(intent);
     }
 
