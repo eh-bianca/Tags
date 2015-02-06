@@ -190,6 +190,7 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_new) {
 
+            //Intents wurden geändert, damit die aufgerufene Activity weiß, wovon sie aufgerufen wurde
             Intent intent = new Intent(this, ManageTaskActivity.class);
             intent.putExtra("Source", 0);
             startActivity(intent);

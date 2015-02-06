@@ -192,6 +192,7 @@ public class UpdateActivity extends Activity {
         tm.updateTask(id,text.getText().toString(),points,List,dateTime);
         Bundle extras = getIntent().getExtras();
         source = extras.getInt("Source");
+        //1 steht für DateActivity 0 für MainActivity
         if(source == 1){
             Intent intent = new Intent(this,DateActivity.class);
             startActivity(intent);
