@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
@@ -48,9 +49,9 @@ public class MainActivity extends Activity {
         int width = size.x;
         int height = size.y;
 
-        Button btn1 =(Button) findViewById(R.id.btn1);
+        ImageButton btn1 =(ImageButton) findViewById(R.id.btn1);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btn1.getLayoutParams();
-        params.width = width/3;
+        params.width =  width/2;
         btn1.setLayoutParams(params);
         btn1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -58,22 +59,15 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button btn2 =(Button) findViewById(R.id.btn2);
+        ImageButton btn2 =(ImageButton) findViewById(R.id.btn2);
         params = (RelativeLayout.LayoutParams) btn2.getLayoutParams();
-        params.width = width/3;
+        params.width = width/2;
         btn2.setLayoutParams(params);
         btn2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivityDate(v);
             }
         });
-
-        Button btn3 =(Button) findViewById(R.id.btn3);
-        params = (RelativeLayout.LayoutParams) btn3.getLayoutParams();
-        params.width = width/3;
-        btn3.setLayoutParams(params);
-
-
 
         ListView listView1 = (ListView) findViewById(R.id.task_list);
 
