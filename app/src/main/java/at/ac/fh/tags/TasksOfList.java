@@ -77,7 +77,6 @@ public class TasksOfList extends Activity {
                         startActivity(getIntent());
                     }
                 });
-
                 alert.setNegativeButton("No, but delete task", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         tm.removeTask(cursor.getInt(0));

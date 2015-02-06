@@ -92,7 +92,6 @@ public class UpdateActivity extends Activity {
                 rb.setChecked(true);
                 break;
         }
-
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout_update);
         layout.setOnTouchListener(new View.OnTouchListener()
         {

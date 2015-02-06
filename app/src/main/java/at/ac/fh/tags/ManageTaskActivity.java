@@ -160,7 +160,6 @@ public class ManageTaskActivity extends Activity {
 
             Toast toast = Toast.makeText(context, noList, duration);
             toast.show();
-
             list = "null";
         }
         if (list != "null") {
