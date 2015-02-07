@@ -109,7 +109,6 @@ public class TasksOfList extends Activity {
         Log.i("Level: ", "" + level);
         Log.i("Punktestand: ", "" + punktestand);
 
-
         if(barStand == 0){
             tvPunkte.setText(progressStatus + "/" + progressBar.getMax());
         }

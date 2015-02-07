@@ -19,8 +19,8 @@
         android:layout_height="40dp"
         android:id="@+id/progressBar"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        />
+        android:layout_alignParentRight="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,8 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/listtitle"
-        android:layout_below="@+id/levelBar"
-     />
+        android:layout_below="@+id/levelBar"/>
 
     <ListView
         android:layout_width="wrap_content"

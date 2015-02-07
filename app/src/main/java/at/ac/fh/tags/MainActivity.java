@@ -134,15 +134,11 @@ public class MainActivity extends Activity {
 
     }
 
-
-
   /*  private int doWork()
     {
         int level=tm.getSum();
 
        return level;
-
-
 
     } */
 

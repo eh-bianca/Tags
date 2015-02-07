@@ -62,21 +62,11 @@ import java.util.Locale;
             calendar.add(Calendar.DAY_OF_YEAR, 7);
             Date nextWeek = calendar.getTime();
 
-
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
             String todayAsString = dateFormat.format(currentDate);
             String tomorrowAsString = dateFormat.format(tomorrow);
             String nextWeekAsString = dateFormat.format(nextWeek);
-
-
-            /*
-        try {
-            currentDate = formatter.parse(cal.getTime().toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-
 
             Cursor c1 = tm.getMostCurrentTasks(todayAsString, tomorrowAsString,nextWeekAsString, "heute");
             Cursor c2 = tm.getMostCurrentTasks(todayAsString, tomorrowAsString,nextWeekAsString, "dieseWoche");
@@ -211,25 +201,25 @@ import java.util.Locale;
         int width = size.x;
         int height = size.y;
 
-            ImageButton btn1 =(ImageButton) findViewById(R.id.btn1);
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btn1.getLayoutParams();
-            params.width = width/2;
-            btn1.setLayoutParams(params);
-            btn1.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
-                    startActivityMain(v);
-                }
-            });
+        ImageButton btn1 =(ImageButton) findViewById(R.id.btn1);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btn1.getLayoutParams();
+        params.width = width/2;
+        btn1.setLayoutParams(params);
+        btn1.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivityMain(v);
+            }
+        });
 
-            ImageButton btn2 =(ImageButton) findViewById(R.id.btn2);
-            params = (RelativeLayout.LayoutParams) btn2.getLayoutParams();
-            params.width = width/2;
-            btn2.setLayoutParams(params);
-            btn2.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    startActivityDate(v);
-                }
-            });
+        ImageButton btn2 =(ImageButton) findViewById(R.id.btn2);
+        params = (RelativeLayout.LayoutParams) btn2.getLayoutParams();
+        params.width = width/2;
+        btn2.setLayoutParams(params);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivityDate(v);
+            }
+        });
 
     }
 
