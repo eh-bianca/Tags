@@ -139,9 +139,10 @@ public class ManageTaskActivity extends Activity {
         Spinner s = (Spinner) findViewById(R.id.spinner);
         EditText text = (EditText) findViewById(R.id.title);
 
-        Calendar c = Calendar.getInstance();
+
         Object month;
         Object dayOfMonth;
+
 
         if (dp.getMonth() + 1 < 10) {
             int temp = dp.getMonth() + 1;
@@ -180,6 +181,18 @@ public class ManageTaskActivity extends Activity {
                 startActivity(intent);
             }
         }
+
+        int day = dp.getDayOfMonth();
+        int monat = dp.getMonth();
+        int year = dp.getYear();
+        int hour=tp.getCurrentHour();
+        int min=tp.getCurrentMinute();
+        // Create a new calendar set to the date chosen
+        // we set the time to midnight (i.e. the first minute of that day)
+        Calendar c = Calendar.getInstance();
+        c.set(year, monat, day,hour,min);
+
+        Log.i("", "" + c);
         scheduleClient.setAlarmForNotification(c);
       }
     }

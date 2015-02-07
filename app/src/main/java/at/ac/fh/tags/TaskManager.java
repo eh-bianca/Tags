@@ -113,6 +113,7 @@ public class TaskManager {
         }
 
     }
+
     public ArrayList<String> getLists() {
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
         Cursor c = db.rawQuery("SELECT distinct list FROM task", null);
