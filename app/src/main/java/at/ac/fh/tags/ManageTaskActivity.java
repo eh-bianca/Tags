@@ -33,6 +33,7 @@ public class ManageTaskActivity extends Activity {
     private int points = 10;
     private int source;
     Context context = this;
+    private ScheduleClient scheduleClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,11 @@ public class ManageTaskActivity extends Activity {
         setContentView(R.layout.activity_manage_task);
 
         tm = new TaskManager(this);
+
+        // Create a new service client and bind our activity to this service
+        scheduleClient = new ScheduleClient(this);
+        scheduleClient.doBindService();
+
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
@@ -66,6 +72,7 @@ public class ManageTaskActivity extends Activity {
                 return false;
             }
         });
+
     }
     protected void hideKeyboard(View view)
     {
@@ -132,6 +139,7 @@ public class ManageTaskActivity extends Activity {
         Spinner s = (Spinner) findViewById(R.id.spinner);
         EditText text = (EditText) findViewById(R.id.title);
 
+        Calendar c = Calendar.getInstance();
         Object month;
         Object dayOfMonth;
 
@@ -172,5 +180,6 @@ public class ManageTaskActivity extends Activity {
                 startActivity(intent);
             }
         }
+        scheduleClient.setAlarmForNotification(c);
       }
     }
