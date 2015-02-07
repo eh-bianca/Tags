@@ -31,7 +31,12 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends Activity {
@@ -132,40 +137,62 @@ public class MainActivity extends Activity {
             }
         });
 
-    }
 
-  /*  private int doWork()
-    {
-        int level=tm.getSum();
 
-       return level;
-
-    } */
-
-//test
-/* muss in seperaten Klassen gemacht werden
         NotificationManager notificationManager = (NotificationManager)
                 getSystemService(NOTIFICATION_SERVICE);
 
         // prepare intent which is triggered if the
 // notification is selected
 
-        Intent intent = new Intent(this, NotificationReceiver.class);
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        long firedate = System.currentTimeMillis();
+
+
+// build notification
+// the addAction re-use the same intent to keep the example short
+        Notification notification  = new Notification.Builder(this)
+                .setWhen(firedate)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentIntent(pIntent)
+                .setAutoCancel(true)
+                .addAction(R.drawable.ic_launcher,"You have open Todos", pIntent).build();
+
+
+        notificationManager.notify(0,notification);
+
+
+    }
+
+
+
+//test
+
+
+     /*   NotificationManager notificationManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+
+        // prepare intent which is triggered if the
+// notification is selected
+
+        Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
 // build notification
 // the addAction re-use the same intent to keep the example short
         Notification notification  = new Notification.Builder(this)
-                .setContentTitle("New mail from " + "test@gmail.com")
-                .setContentText("Subject")
+                .setContentTitle("New Todo")
+                .setContentText("You have open Todos for today")
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
                 .addAction(R.drawable.ic_launcher, "Call", pIntent)
                 .addAction(R.drawable.ic_launcher, "More", pIntent)
-                .addAction(R.drawable.ic_launcher, "And more", pIntent).build();
+                .addAction(R.drawable.ic_launcher, "And more", pIntent).build(); */
 
-*/
+
 
     public void startTasksOfList(View v, String list) {
         Intent intent = new Intent(this, TasksOfList.class);
