@@ -39,9 +39,10 @@ public class MainActivity extends Activity {
     private Context context = this;
     private ProgressBar progressBar;
     private int progressStatus = 0;
-    private TextView textView;
+    private TextView tvPunkte;
+    private TextView tvLevel;
     private Handler handler = new Handler();
-    private int level;
+    private int punktestand;
 
 
 
@@ -54,24 +55,31 @@ public class MainActivity extends Activity {
         tm = new TaskManager(this);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        textView = (TextView) findViewById(R.id.levelBar);
+        tvPunkte = (TextView) findViewById(R.id.levelBar);
+        tvLevel = (TextView) findViewById(R.id.level);
 
 
-        int level=tm.getSum();
+        punktestand=tm.getSum();
 
-        int barStand=level%100;
-
-
+        int barStand=punktestand%100;
+        int level = (punktestand - barStand)/100;
+        tvLevel.setText("Level " + level);
         Log.i("Level: ", "" + level);
-
-        while (progressStatus < barStand) {
-        progressStatus += 1;
+        Log.i("Punktestand: ", "" + punktestand);
 
 
-        progressBar.setProgress(progressStatus);
+        if(barStand == 0){
+            tvPunkte.setText(progressStatus + "/" + progressBar.getMax());
+        }
+        else {
+            while (progressStatus < barStand) {
+                progressStatus += 1;
 
-        textView.setText(progressStatus + "/" + progressBar.getMax());
 
+                progressBar.setProgress(progressStatus);
+
+                tvPunkte.setText(progressStatus + "/" + progressBar.getMax());
+            }
         }
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -100,6 +108,12 @@ public class MainActivity extends Activity {
             }
         });
 
+        params = (RelativeLayout.LayoutParams) tvLevel.getLayoutParams();
+        params.width = width / 4;
+        tvLevel.setLayoutParams(params);
+
+        params = (RelativeLayout.LayoutParams) progressBar.getLayoutParams();
+        params.width = (width / 2);
         ListView listView1 = (ListView) findViewById(R.id.task_list);
 
         ArrayList<String> Listen = new ArrayList<String>();
