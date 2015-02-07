@@ -15,6 +15,14 @@
         android:layout_alignParentLeft="true"
         android:textSize="20dp"
         android:id="@+id/level"/>
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:id="@+id/progressBar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,20 +44,11 @@
         android:layout_below="@+id/textView"
         android:id="@+id/task_list"
         android:layout_width="fill_parent"
-        android:layout_height="120dp"
+        android:layout_height="300dp"
         android:background="#ffffffff"
         android:drawSelectorOnTop="false"
         android:textFilterEnabled="false"
         ></ListView>
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:id="@+id/progressBar"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-         />
 
     <ImageButton
         android:src="@drawable/calender"
@@ -57,7 +56,8 @@
         android:layout_width="20dp"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:background="#ff54d4ff" />
 
     <ImageButton
         android:src="@drawable/list"
@@ -65,6 +65,7 @@
         android:layout_width="20dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="#ff54d4ff" />
 
 </RelativeLayout>

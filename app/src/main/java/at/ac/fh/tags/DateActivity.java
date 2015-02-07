@@ -18,8 +18,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,6 +39,11 @@ import java.util.Locale;
         private TaskManager tm;
         private Context context = this;
         int source = 1;
+        private ProgressBar progressBar;
+        private int progressStatus = 0;
+        private TextView tvPunkte;
+        private TextView tvLevel;
+        private int punktestand;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +91,7 @@ import java.util.Locale;
                     startUpdateActivity(view, id);
                 }
             });
-            listView1.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
+            listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                     final Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
@@ -169,6 +176,33 @@ import java.util.Locale;
             SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this, R.layout.task_entry, c2, columns, views);
             listView2.setAdapter(adapter2);
             loadButtons();
+
+            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            tvPunkte = (TextView) findViewById(R.id.levelBar);
+            tvLevel = (TextView) findViewById(R.id.level);
+
+            punktestand=tm.getSum();
+
+            int barStand=punktestand%100;
+            int level = (punktestand - barStand)/100;
+            tvLevel.setText("Level " + level);
+            Log.i("Level: ", "" + level);
+            Log.i("Punktestand: ", "" + punktestand);
+
+
+            if(barStand == 0){
+                tvPunkte.setText(progressStatus + "/" + progressBar.getMax());
+            }
+            else {
+                while (progressStatus < barStand) {
+                    progressStatus += 1;
+
+
+                    progressBar.setProgress(progressStatus);
+
+                    tvPunkte.setText(progressStatus + "/" + progressBar.getMax());
+                }
+            }
         }
         public void loadButtons(){
         Display display = getWindowManager().getDefaultDisplay();

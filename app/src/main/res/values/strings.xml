@@ -4,8 +4,10 @@
     <string name="app_name">ToDo-List</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_manage_task">New Task</string>
-    <string name="title_activity_update">Update Task</string>
-    <string name="title_activity_tasks_of_list">TasksOfList</string>
+    <string name="title_activity_manage_task">NEW TASK</string>
+    <string name="title_activity_update">UPDATE TASK</string>
+    <string name="title_activity_tasks_of_list">TASKS OF LIST</string>
+    <string name="title_activity_date">WHAT TO DO TODAY</string>
+    <string name="title_activity_main">CATEGORIES</string>
 
 </resources>

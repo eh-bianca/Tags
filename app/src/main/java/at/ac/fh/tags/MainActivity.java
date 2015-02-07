@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -58,7 +59,6 @@ public class MainActivity extends Activity {
         tvPunkte = (TextView) findViewById(R.id.levelBar);
         tvLevel = (TextView) findViewById(R.id.level);
 
-
         punktestand=tm.getSum();
 
         int barStand=punktestand%100;
@@ -92,8 +92,8 @@ public class MainActivity extends Activity {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btn1.getLayoutParams();
         params.width =  width/2;
         btn1.setLayoutParams(params);
-        btn1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        btn1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 startActivityMain(v);
             }
         });
@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
 
         Listen = tm.getLists();
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.test_list_item, Listen);  //Adapter mappt zwischen dem Cursor (oder anderen Datenquelle) und der ListView
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Listen);  //Adapter mappt zwischen dem Cursor (oder anderen Datenquelle) und der ListView
 
         listView1.setAdapter(arrayAdapter);
 

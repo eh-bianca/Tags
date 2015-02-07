@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +27,12 @@ public class TasksOfList extends Activity {
 
     private TaskManager tm;
     private Context context = this;
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private TextView tvPunkte;
+    private TextView tvLevel;
+    private Handler handler = new Handler();
+    private int punktestand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +93,46 @@ public class TasksOfList extends Activity {
                     }
                 });
                 alert.show();
-            return true;
+                return true;
             }
         });
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        tvPunkte = (TextView) findViewById(R.id.levelBar);
+        tvLevel = (TextView) findViewById(R.id.level);
+
+        punktestand=tm.getSum();
+
+        int barStand=punktestand%100;
+        int level = (punktestand - barStand)/100;
+        tvLevel.setText("Level " + level);
+        Log.i("Level: ", "" + level);
+        Log.i("Punktestand: ", "" + punktestand);
+
+
+        if(barStand == 0){
+            tvPunkte.setText(progressStatus + "/" + progressBar.getMax());
+        }
+        else {
+            while (progressStatus < barStand) {
+                progressStatus += 1;
+
+
+                progressBar.setProgress(progressStatus);
+
+                tvPunkte.setText(progressStatus + "/" + progressBar.getMax());
+            }
+        }
     }
+
     public void startUpdateActivity(View v, int id) {
         Intent intent = new Intent(this, UpdateActivity.class);
         intent.putExtra("TaskId", id);
+        startActivity(intent);
+    }
+
+    public void startActivityMain(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

@@ -2,7 +2,6 @@
 
     <style name="AppTheme" parent="android:Theme.Holo.Light">
         <item name="android:datePickerStyle">@android:style/Widget.DatePicker</item>
-
-        </style>
+    </style>
 
 </resources>

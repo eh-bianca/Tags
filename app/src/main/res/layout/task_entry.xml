@@ -10,18 +10,16 @@
         android:id="@+id/task_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textColor="#ff3324ff" />
-
+        android:textSize="20dp" />
     <TextView
         android:id="@+id/task_points"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="15dp"/>
-
     <TextView
         android:id="@+id/task_date"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+     />
 
 </LinearLayout>
