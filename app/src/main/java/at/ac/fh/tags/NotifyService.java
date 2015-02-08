@@ -59,7 +59,7 @@ public class NotifyService extends Service {
         // Titel der Notification
         CharSequence title = "TAGS";
         // Icon der Notification
-        int icon = R.drawable.ic_launcher;
+        int icon = R.drawable.app_symbol;
         //Textfeld der Notification
         CharSequence text = "You have todos open.";
         //Zeitpunkt der Notification
