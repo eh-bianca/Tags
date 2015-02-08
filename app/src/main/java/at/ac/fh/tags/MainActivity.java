@@ -62,9 +62,9 @@ public class MainActivity extends Activity {
 
         tm = new TaskManager(this);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        tvPunkte = (TextView) findViewById(R.id.levelBar);
-        tvLevel = (TextView) findViewById(R.id.level);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        tvPunkte = (TextView) findViewById(R.id.levelBar1);
+        tvLevel = (TextView) findViewById(R.id.level1);
 
         punktestand=tm.getSum();
 
