@@ -130,6 +130,7 @@ public class TasksOfList extends Activity {
         Intent intent = new Intent(this, UpdateActivity.class);
         intent.putExtra("TaskId", id);
         intent.putExtra("Source", source);
+        intent.putExtra("List", list);
         startActivity(intent);
     }
 
