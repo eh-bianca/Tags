@@ -56,6 +56,7 @@ public class ScheduleClient {
      */
     public void setAlarmForNotification(Calendar c){
         mBoundService.setAlarm(c);
+
     }
 
     /**

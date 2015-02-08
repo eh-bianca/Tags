@@ -25,6 +25,7 @@ public class AlarmTask {
         this.date = date;
     }
 
+
     public void run() {
         // Request to start are service when the alarm date is upon us
         // We don't start an activity as we just want to pop up a notification into the system bar not a full activity

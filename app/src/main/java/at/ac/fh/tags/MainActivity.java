@@ -139,58 +139,12 @@ public class MainActivity extends Activity {
 
 
 
-        NotificationManager notificationManager = (NotificationManager)
-                getSystemService(NOTIFICATION_SERVICE);
-
-        // prepare intent which is triggered if the
-// notification is selected
-
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-        long firedate = System.currentTimeMillis();
-
-
-// build notification
-// the addAction re-use the same intent to keep the example short
-        Notification notification  = new Notification.Builder(this)
-                .setWhen(firedate)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setContentIntent(pIntent)
-                .setAutoCancel(true)
-                .addAction(R.drawable.ic_launcher,"You have open Todos", pIntent).build();
-
-
-        notificationManager.notify(0,notification);
 
 
     }
 
 
 
-//test
-
-
-     /*   NotificationManager notificationManager = (NotificationManager)
-                getSystemService(NOTIFICATION_SERVICE);
-
-        // prepare intent which is triggered if the
-// notification is selected
-
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-// build notification
-// the addAction re-use the same intent to keep the example short
-        Notification notification  = new Notification.Builder(this)
-                .setContentTitle("New Todo")
-                .setContentText("You have open Todos for today")
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setContentIntent(pIntent)
-                .setAutoCancel(true)
-                .addAction(R.drawable.ic_launcher, "Call", pIntent)
-                .addAction(R.drawable.ic_launcher, "More", pIntent)
-                .addAction(R.drawable.ic_launcher, "And more", pIntent).build(); */
 
 
 

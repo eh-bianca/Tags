@@ -60,7 +60,7 @@ public class NotifyService extends Service {
      */
     private void showNotification() {
         // This is the 'title' of the notification
-        CharSequence title = "Alarm!!";
+        CharSequence title = "TAGS";
         // This is the icon to use on the notification
         int icon = R.drawable.ic_launcher;
         // This is the scrolling text of the notification
