@@ -38,6 +38,7 @@ public class UpdateActivity extends Activity {
     private RadioButton rb;
     private String currentList = "";
     Context context = this;
+    private ScheduleClient scheduleClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,10 @@ public class UpdateActivity extends Activity {
         setContentView(R.layout.activity_update);
 
         tm = new TaskManager(this);
+
+        // Erstelle einen neuen service client und die Verbindung mit bind von Activity zu Service
+        scheduleClient = new ScheduleClient(this);
+        scheduleClient.doBindService();
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
@@ -206,8 +211,22 @@ public class UpdateActivity extends Activity {
         else {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }
-    }
 
+        }
+        //auslesen des timepickers und datepickers
+        int day = dp.getDayOfMonth();
+        int monat = dp.getMonth();
+        int year = dp.getYear();
+        int hour=tp.getCurrentHour();
+        int min=tp.getCurrentMinute();
+        // neuer calendar mit dem werten aus timepickers und datepickers
+        Calendar c = Calendar.getInstance();
+        c.set(year, monat, day,hour,min);
+
+        Log.i("", "" + c);
+        scheduleClient.setAlarmForNotification(c);
+
+
+    }
 
 }

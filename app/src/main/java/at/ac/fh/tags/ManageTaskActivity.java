@@ -42,7 +42,7 @@ public class ManageTaskActivity extends Activity {
 
         tm = new TaskManager(this);
 
-        // Create a new service client and bind our activity to this service
+        // Erstelle einen neuen service client und die Verbindung mit bind von Activity zu Service
         scheduleClient = new ScheduleClient(this);
         scheduleClient.doBindService();
 
@@ -187,14 +187,13 @@ public class ManageTaskActivity extends Activity {
                 startActivity(intent);
             }
         }
-
+        //auslesen des timepickers und datepickers
         int day = dp.getDayOfMonth();
         int monat = dp.getMonth();
         int year = dp.getYear();
         int hour=tp.getCurrentHour();
         int min=tp.getCurrentMinute();
-        // Create a new calendar set to the date chosen
-        // we set the time to midnight (i.e. the first minute of that day)
+        // neuer calendar mit dem werten aus timepickers und datepickers
         Calendar c = Calendar.getInstance();
         c.set(year, monat, day,hour,min);
 
