@@ -38,7 +38,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * Created by Bianca on 30.01.2015.
+ */
 public class MainActivity extends Activity {
 
     private TaskManager tm;

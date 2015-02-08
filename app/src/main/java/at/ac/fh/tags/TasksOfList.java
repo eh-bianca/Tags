@@ -22,6 +22,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+/**
+ * Created by Bianca on 06.02.2015.
+ */
 
 public class TasksOfList extends Activity {
 

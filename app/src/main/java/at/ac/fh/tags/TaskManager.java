@@ -10,6 +10,10 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Created by Bianca on 30.01.2015.
+ */
+
 public class TaskManager {
     public final String DB_NAME = "TODO_DB";
     private TaskSQLHelper sqlHelper;
