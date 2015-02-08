@@ -10,9 +10,7 @@ import java.util.Calendar;
 
 public class ScheduleService extends Service {
 
-    /**
-     * Class for clients to access
-     */
+
     public class ServiceBinder extends Binder {
         ScheduleService getService() {
             return ScheduleService.this;
@@ -23,7 +21,7 @@ public class ScheduleService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("ScheduleService", "Received start id " + startId + ": " + intent);
 
-        // We want this service to continue running until it is explicitly stopped, so return sticky.
+
         return START_STICKY;
     }
 
@@ -37,15 +35,12 @@ public class ScheduleService extends Service {
         return mBinder;
     }
 
-    // This is the object that receives interactions from clients. See
+    // service object Erhalt von Daten über den Service
          private final IBinder mBinder = new ServiceBinder();
 
-    /**
-     * Show an alarm for a certain date when the alarm is called it will pop up a notification
-     */
+    //Notificationauslöser
     public void setAlarm(Calendar c) {
-        // This starts a new thread to set the alarm
-        // You want to push off your tasks onto a new thread to free up the UI to carry on responding
+        // setzt die Notification in der AlarmTask Klasse
         new AlarmTask(this, c).run();
     }
 }
