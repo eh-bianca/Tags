@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -211,17 +212,18 @@ import java.util.Locale;
 
         ImageButton btn1 =(ImageButton) findViewById(R.id.btn1);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btn1.getLayoutParams();
-        params.width = width/2;
+        params.width = width/2-(width/16);
         btn1.setLayoutParams(params);
         btn1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivityMain(v);
             }
         });
+        btn1.setBackgroundColor(Color.parseColor("#ff54d4ff"));
 
         ImageButton btn2 =(ImageButton) findViewById(R.id.btn2);
         params = (RelativeLayout.LayoutParams) btn2.getLayoutParams();
-        params.width = width/2;
+        params.width = width/2-(width/16);
         btn2.setLayoutParams(params);
         btn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
