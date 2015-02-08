@@ -33,6 +33,8 @@ public class TasksOfList extends Activity {
     private TextView tvLevel;
     private Handler handler = new Handler();
     private int punktestand;
+    private int source = 2;
+    private String list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class TasksOfList extends Activity {
         tm = new TaskManager(this);
 
         Bundle extras = getIntent().getExtras();
-        String list = extras.getString("List");
+        list = extras.getString("List");
         Log.i("List", list);
 
         final Cursor c = tm.getTasksOfList(list);
@@ -127,6 +129,7 @@ public class TasksOfList extends Activity {
     public void startUpdateActivity(View v, int id) {
         Intent intent = new Intent(this, UpdateActivity.class);
         intent.putExtra("TaskId", id);
+        intent.putExtra("Source", source);
         startActivity(intent);
     }
 
@@ -150,7 +153,8 @@ public class TasksOfList extends Activity {
 
             //Intents wurden geändert, damit die aufgerufene Activity weiß, wovon sie aufgerufen wurde
             Intent intent = new Intent(this, ManageTaskActivity.class);
-            intent.putExtra("Source", 0);
+            intent.putExtra("Source", source);
+            intent.putExtra("List", list);
             startActivity(intent);
 
             return true;

@@ -197,6 +197,12 @@ public class UpdateActivity extends Activity {
             Intent intent = new Intent(this,DateActivity.class);
             startActivity(intent);
         }
+        else if(source == 2) {
+            String list = extras.getString("List");
+            Intent intent = new Intent(this, TasksOfList.class);
+            intent.putExtra("List", list);
+            startActivity(intent);
+        }
         else {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

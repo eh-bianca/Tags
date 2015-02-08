@@ -176,6 +176,12 @@ public class ManageTaskActivity extends Activity {
             if (source == 1) {
                 Intent intent = new Intent(this, DateActivity.class);
                 startActivity(intent);
+            }
+            else if(source == 2){
+                String liste = extras.getString("List");
+                Intent intent = new Intent(this, TasksOfList.class);
+                intent.putExtra("List", liste);
+                startActivity(intent);
             } else{
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
