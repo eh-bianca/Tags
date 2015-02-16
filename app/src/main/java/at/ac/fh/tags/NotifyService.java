@@ -57,11 +57,11 @@ public class NotifyService extends Service {
      */
     private void showNotification() {
         // Titel der Notification
-        CharSequence title = "TAGS";
+        CharSequence title = "ToDo";
         // Icon der Notification
         int icon = R.drawable.app_symbol;
         //Textfeld der Notification
-        CharSequence text = "You have todos open.";
+        CharSequence text = "You have something to do today";
         //Zeitpunkt der Notification
         long time = System.currentTimeMillis();
 
